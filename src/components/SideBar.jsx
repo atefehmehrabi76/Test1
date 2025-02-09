@@ -18,7 +18,7 @@ function SideBar() {
             post.map((item)=>{
                 return(
                     <li key={item.id} className='mb-3'>
-                        <NavLink to={`/route-2/${item.id}`}>{item.title}</NavLink>
+                        <NavLink className={({isActive ,isPending})=>isActive ? "text-blue-500" : ""} to={`/route-2/${item.id}`}>{item.title}</NavLink>
                     </li>
                 )
             })
