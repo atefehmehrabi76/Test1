@@ -1,27 +1,23 @@
 import './App.css';
-import React from 'react'
-import Header from './components/Header';
-import { Route, Routes } from 'react-router-dom';
-import RouteOnePage from './pages/RouteOnePage';
-import RouteTwoPage from './pages/RouteTwoPage';
-import RouteThreePage from './pages/RouteThreePage';
-import NotFoundPage from './pages/NotFoundPage';
-import SubRoutePage from './pages/SubRoutePage';
-import UseRef from './hooks/UseRef';
+import React, { useState } from 'react';
+import Box from './components/Box';
+import InputContext from './context/inputContext';
+
 
 function App() {
+  const[name,setName]=useState("");
+  const contextValue={
+    label:"Your Name",
+    type:"text",
+    placeHolder:"enter your name",
+    handleKey:(e)=>{setName(e.target.value)}
+  }
   return (
     <>
-    <UseRef/>
-       <Header/>
-       <Routes>
-          <Route path='*' element={<NotFoundPage/>}/>
-          <Route path='/route-1' element={<RouteOnePage/>}/>
-          <Route path='/route-2' element={<RouteTwoPage/>}>
-            <Route path=':id' element={<SubRoutePage/>}/>
-          </Route>
-          <Route path='/route-3' element={<RouteThreePage/>}/>
-       </Routes>
+    <InputContext.Provider value={contextValue}>
+      <Box/>
+    </InputContext.Provider>
+    <p>{name}</p>
     </>
   )
 }
